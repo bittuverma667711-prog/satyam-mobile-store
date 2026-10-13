@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="hi">
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Satyam Mobile Store | Customer & Admin</title>
 <style>
 :root{--blue:#2874f0;--blue2:#1557bd;--yellow:#ffe500;--orange:#fb641b;--bg:#f1f3f6;--card:#fff;--ink:#212121;--muted:#6b7280;--line:#e5e7eb;--green:#16834a;--red:#c62828}
@@ -31,6 +31,9 @@ main{max-width:1250px;margin:16px auto;padding:0 14px}.banner{background:linear-
 <div id="cartModal" class="hidden" style="position:fixed;inset:0;background:#0008;z-index:50;padding:12px;overflow:auto"><div class="panel" style="max-width:600px;margin:25px auto;padding:18px"><div class="sectionhead"><h2>🛒 आपका कार्ट</h2><button class="secondary" onclick="closeCart()">✕ बंद करें</button></div><div id="cartItems"></div><div class="couponline"><input id="couponInput" placeholder="कूपन कोड"><button onclick="applyCoupon()">Apply</button></div><div id="couponMsg" class="muted" style="margin:7px 0"></div><div id="cartTotals"></div><h3>डिलीवरी विवरण</h3><div class="form"><input id="buyerName" placeholder="आपका नाम"><input id="buyerPhone" inputmode="tel" placeholder="मोबाइल नंबर"><input id="buyerPin" inputmode="numeric" placeholder="PIN code" onblur="showDelivery()"><input id="buyerAddress" class="full" placeholder="पूरा डिलीवरी पता"><select id="paymentMethod"><option value="COD">Cash on Delivery (COD)</option><option value="UPI">UPI / Online (भुगतान पुष्टि दुकान से होगी)</option></select></div><div id="deliveryInfo" class="notice" style="margin:10px 0">PIN code डालकर डिलीवरी चार्ज देखें।</div><button class="orange" style="width:100%" onclick="placeOrder()">ऑर्डर कन्फर्म करें</button><p class="notice" style="margin-top:10px">डेमो: ऑर्डर इसी ब्राउज़र में सेव होता है। UPI/पेमेंट विकल्प अभी वास्तविक भुगतान नहीं करता।</p></div></div>
 <div class="foot">© Satyam Mobile Accessories · Demo storefront · ऑनलाइन लाइव करने से पहले सुरक्षा, भुगतान और डेटा-बैकअप सेटअप जरूरी है।</div>
 <script>
+const SUPABASE_URL = "https://msjlkijljcmdzsuynnop.supabase.co";
+const SUPABASE_KEY = "sb_publishable_Jvj_SFVS0HHAcG5R8kdP-w_j3YkM6QU";
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const CATS=["मोबाइल कवर","टेम्पर्ड ग्लास","ईयरबड्स","स्मार्ट वॉच","स्पीकर","चार्जर","पावर बैंक","माउस & की-बोर्ड","मेमोरी कार्ड","पेन ड्राइव","अन्य"];
 const starter=[
 {id:101,name:"मोबाइल बैक कवर",cat:"मोबाइल कवर",price:99,cost:55,mrp:149,stock:20,icon:"📱",desc:"अलग-अलग डिजाइन; मॉडल चुनें",models:["Samsung A13","Redmi 12","Realme C55"],rating:4.5,photo:""},
